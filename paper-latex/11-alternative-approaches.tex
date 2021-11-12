@@ -1,0 +1,12 @@
+\section{Alternative approaches}
+\label{sec:alternative-approaches}
+
+\sysname allows authors to retain complete freedom in designing their experiments, while still providing a way to directly couple them with the paper document. We believe it to be unique in these capabilities.
+
+\textbf{Online websites}, which some authors build to accompany papers, can indeed allow even greater interactivity. Despite the sizable burden this imposes on authors, this approach still does not help with the issue of ensuring consistency between a paper's text/plots and the experiments behind them. While we chose to work within the bounds of today's dominant \LaTeX{}-generated-PDF mode of publishing networks research, a best-of-both-worlds approach could use a \sysname-like approach with HTML markup (and visible user-interface elements for editing the editable parts) instead of \LaTeX{} markup.
+
+It is also possible to \textbf{insert code/scripts in LaTeX~\cite{pythontex, pynea, bar2020reproduciblelatex}}. But this requires readers to understand the code, which can be difficult for  complex experiment pipelines. Another similar idea is that of using a meta-programming language to compile to \LaTeX{}~\cite{orgmode}, but this just moves the problem to understanding the meta-programming language. These solutions would also shift the content and writing style of papers substantially, and would likely impair readability and meet resistance from both authors and reviewers / readers.
+
+\textbf{Jupyter notebooks}~\cite{jupyter-notebooks} enable interactive code, with accompanying text, and result visuals. The intended interaction mode is for readers to edit the code, while \sysname's intent is to \textit{not} require that, and instead, to have most readers think of code as a blackbox, for which they can change inputs and select the outputs. (A subset of readers may use \sysname's hooks to the code as entry points for deeper examination.) Further, Jupyter notebooks do not address the issue of separation between paper-text and system-experiments that \sysname addresses, and are limited to self-contained experiments using a few select language runtimes, far short of the diversity of experiment methods used in networking papers.
+
+\textbf{Gigaleaf}~\cite{gigaleaf} is a platform which synchronizes the plots from a Jupyter notebook into a \LaTeX{} folder. It is however only one-way: it is not possible to have the \LaTeX{} text control which experiments to run or which results to create.

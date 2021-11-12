@@ -1,0 +1,89 @@
+\documentclass[sigconf]{acmart}
+
+% Disable / remove copyright boxes
+\setcopyright{none}
+\settopmatter{printacmref=false}
+\renewcommand\footnotetextcopyrightpermission[1]{}
+
+% Header on each page
+\acmConference[Submitted]{Submitted}{2021}{December 1st}
+
+% Useful commands
+\include{commands}
+\include{experimentex}
+
+\begin{document}
+
+% Title
+\title{\sysname: tying networking papers to their experiment code}
+
+% Shorthand authors
+% \renewcommand{\shortauthors}{Kassing and Singla.}
+
+\author{Simon Kassing}
+\affiliation{
+    \institution{ETH Zurich}%
+    \city{}%
+    \country{}%
+}
+\email{kassings@ethz.ch}
+
+\author{Ankit Singla}
+\affiliation{
+    \institution{ETH Zurich}%
+    \city{}%
+    \country{}%
+}
+\email{asingla@ethz.ch}
+
+\begin{abstract}
+\textit{Networking research and instruction often tackle systems with a large number of configurations and possible inputs. This creates substantial complexity not only in experimentation, but also in conveying its results in papers and texts, which evolve in parallel to the experiments. First, this can cause inconsistencies between the text and its underlying experiments, requiring constant vigilance from authors. Second, the text only exposes the behavior of the studied systems across a small fraction of configurations and inputs, leaving readers with doubts about behavior in other settings.}
+
+\textit{With \sysname, we take the first steps towards addressing these problems by: (a) bridging the gap between networking experiments and texts describing them, by having the text itself control what experiments are run; and (b) allowing readers to interact with the text and explore the behavior of the involved systems under different inputs, \textbf{without} needing any knowledge of the underlying system code. We show the utility of \sysname for the research process using three showcase sets of experiments, together with another example showing its value for teaching networking concepts.}
+
+\end{abstract}
+
+\begin{CCSXML}
+<ccs2012>
+   <concept>
+       <concept_id>10011007.10011074.10011092.10011096</concept_id>
+       <concept_desc>Software and its engineering~Reusability</concept_desc>
+       <concept_significance>500</concept_significance>
+       </concept>
+   <concept>
+       <concept_id>10003033.10003079.10011672</concept_id>
+       <concept_desc>Networks~Network performance analysis</concept_desc>
+       <concept_significance>500</concept_significance>
+       </concept>
+ </ccs2012>
+\end{CCSXML}
+
+\ccsdesc[500]{Software and its engineering~Reusability}
+\ccsdesc[500]{Networks~Network performance analysis}
+
+\keywords{Reproducibility, Automatic Experiment Framework}
+
+\maketitle
+
+\input{01-introduction}
+\input{02-example}
+\input{03-system-design}
+\input{04-guidance-for-authors}
+\input{05-cc-showcase}
+\input{06-netload-showcase}
+\input{07-toplists-showcase}
+\input{08-nsdi-benefits}
+\input{09-reproducibility-pipeline}
+\input{10-limitations}
+\input{11-alternative-approaches}
+\input{12-conclusion}
+
+\clearpage
+
+\bibliographystyle{ACM-Reference-Format}
+\bibliography{bibliography}
+
+\appendix
+\input{99-appendix}
+
+\end{document}

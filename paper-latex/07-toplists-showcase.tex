@@ -1,0 +1,58 @@
+\begin{figure*}[t]
+    
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    % CODEBIND HELP NOTES
+    %
+    % For each of the below figures, the format is as follows:
+    % plot-rank-against-daily-change-[statistic].pdf
+    %
+    % With [statistic] can be any of the following:
+    % min
+    % mean
+    % max
+    % median
+    % percentile-X with X in {0, 1, 2, ..., 100}
+    %
+    
+	\centering
+% 	\hspace*{\fill}%
+	\subfigure[Mean]{%
+		\label{fig:toplists:mean}%
+		\expincludegraphics[width=2.3in]{tl}{plot-rank-against-daily-change-mean.pdf}%
+	}%
+	\hfill%
+	\subfigure[10th \%-tile]{%
+		\label{fig:toplists:10th}%
+		\expincludegraphics[width=2.3in]{tl}{plot-rank-against-daily-change-percentile-10.pdf}%
+	}%
+ 	\hfill%
+	\subfigure[90th\%-tile]{%
+		\label{fig:toplists:90th}%
+		\expincludegraphics[width=2.3in]{tl}{plot-rank-against-daily-change-percentile-90.pdf}%
+	}%
+% 	\hspace*{\fill}
+	\vspace{-2pt}%
+	\caption{\small \em Various daily change metrics across the top-K of Internet top domain lists (data from Fig.~2(c) of \cite{top-lists}).}
+	\label{fig:toplists}
+	\vspace{-6pt}
+\end{figure*}
+
+\expinstance{tl}{top-lists}
+\section{Showcase 3: Dataset Analysis}
+\label{sec:dataset-analysis}
+
+Not all experiments can be reproduced by readers --- the code might be proprietary, the hardware used might be custom, or it might be prohibitively expensive to rent the computational power needed for it to finish in feasible time. It is also possible that the experiments are inherently the result of a manual process (\eg a questionnaire), or a process which is not easily repeatable. As such, it is not possible to have the readers tweak the experimental setup. However, instead, authors can expose the dataset, and permit readers to interactively explore the dataset beyond what is shown in the paper.
+
+We use the dataset and accompanying code made publicly available by Scheitle et al.~\cite{top-lists}. In their work, they analyze 3 commonly used ranked lists of Web domains: Alexa (Alexa-18 referring to using data from end of January 2018 till April 2018, and Alexa-1318 to data from 2013 till end of January 2018), Umbrella, and Majestic. The study characterizes, compares, and explains the differences of these lists. Their core experiment was the daily download of these lists over a long period of time, which they subsequently used to investigate how they evolved over time.
+
+We focus on a small part of their study in which they analyze how stable the top lists are on a daily basis (\S6.1 of \cite{top-lists}). In it, they want to investigate whether, \eg the top-100 domains are more stable than the top-1000. For every list, they calculate from the lists what percent of the top-K has changed on each day. They use the mean across days as the metric, and graphically plot it against rank (Fig.~\ref{fig:toplists:mean}). The mean daily change of the top-1K and top-10K for Alexa-18 are respectively \expincludetext{tl}{alexa-18-daily-change-rank-1000-mean.txt} and \expincludetext{tl}{alexa-18-daily-change-rank-10000-mean.txt}, whereas for Umbrella-JOINT they are \expincludetext{tl}{umbrella-joint-daily-change-rank-1000-mean.txt} and \expincludetext{tl}{umbrella-joint-daily-change-rank-10000-mean.txt}. In the mean, Alexa-18 is the most unstable top list for top-1K and top-10k.
+
+An inquisitive reader might be interested in statistics beyond the mean, for instance to understand better the best of daily changes look like (\eg its 10th percentile), or conversely the worst cases (\eg its 90th percentile). With \sysname the authors can empower the reader to be able to easily add additional plots to find out (Fig.~\ref{fig:toplists:10th} and Fig.~\ref{fig:toplists:90th}).
+
+\parab{Worst daily changes.} The 90th percentile daily change of the top-1K and top-10K for Alexa-18 are \expincludetext{tl}{alexa-18-daily-change-rank-1000-percentile-90.txt} and \expincludetext{tl}{alexa-18-daily-change-rank-10000-percentile-90.txt}, whereas for Umbrella-JOINT they are respectively \expincludetext{tl}{umbrella-joint-daily-change-rank-1000-percentile-90.txt} and \expincludetext{tl}{umbrella-joint-daily-change-rank-10000-percentile-90.txt}. In this instance, the reader is able to observe that for the top-1K and especially the top-10K, Umbrella-JOINT's 10\% of worst days are similar to those of Alexa-18.
+
+\parab{Best vs. worst daily changes.} The 10th percentile for Umbrella-JOINT is significantly better than its 90th percentile: the top-1M sees \expincludetext{tl}{umbrella-joint-daily-change-rank-1000000-percentile-10.txt} daily change vs. \expincludetext{tl}{umbrella-joint-daily-change-rank-1000000-percentile-90.txt}. For Alexa-18 on the other hand, this difference is not as large: its top-1M sees \expincludetext{tl}{alexa-18-daily-change-rank-1000000-percentile-10.txt} vs. \expincludetext{tl}{alexa-18-daily-change-rank-1000000-percentile-90.txt} at its 10th and 90th percentile. The extremities of daily change proportionally vary more for Umbrella-JOINT than for Alexa-18.
+
+All of above are additional observations that can help the reader to gain a deeper understanding of the paper's subject matter. Further, if the reader has even more specific questions whose metrics and plots are not present in the plotter, the reader at least has a starting point to trace the plots that are there to their origins in the code base.
+
+\greybox{\textbf{Behind the scenes:} In cases where readers cannot feasibly rerun the experiments, \sysname still adds value: authors can use it to empower readers to explore plots beyond those shown in the paper, as well as to extract data point values directly from plots.}

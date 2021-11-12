@@ -1,0 +1,34 @@
+name: build
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.7]
+
+    steps:
+
+      - name: "Checkout repository"
+        uses: actions/checkout@v2
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Setup environment
+        run: |
+          bash setup_env.sh
+
+      - name: Extract partial run results
+        run: |
+          mkdir -p temp
+          tar -xzf partial-temp-runs.tar.gz -C temp
+
+      - name: Reproduce
+        run: |
+          bash reproduce.sh

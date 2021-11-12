@@ -1,0 +1,33 @@
+\section{Introduction}
+
+\markerlessfootnote{
+    This paper is written using \sysname.\\
+    \textbf{\href{https://drive.google.com/file/d/1f8gu3MpWzXM4WbpFLy7DXDcR4z3s6Ws9/view}{Demo video}} and code are available at:\\
+    \url{https://github.com/snkas/codebind-paper}\\
+    Code checksum: \expcodechecksum{}
+}
+The typical networking paper features numerous experiments and their resulting data and plots, often describing a system's behavior across a range of experiment scenarios and varied settings for parameters and configuration knobs. The resulting high complexity of writing, reviewing, and reading networking papers and texts, creates substantial challenges in ensuring their correctness, reproducibility, and relevance. 
+
+First, the limited real-estate of a paper forces authors to pick a subset of results. Thus, only a fraction of the system's range of behaviors can be shown, with results for only some choices of the involved configuration knobs. Reviewers and readers have to rely on the authors' claims of the choices being representative. When the perspectives of reviewers and authors diverge on which configurations are most relevant, there is no easy way for reviewers to ascertain what the results would be for their preferred settings.
+
+Second, what configurations are most relevant may change over time. For instance, the hardware costs that determine the fair comparison point between two designs could shift; or the typical operational context --- network round trip time, bandwidth, loss rate, or the relative performance of different potential bottleneck components ---  could change, making the authors' choices sub-optimal for gathering useful insights.
+
+Third, authors manually distill experimental insights into a paper in a manner that is prone to inconsistencies arising from parallel changes made to the experiments and to the paper's text. Multiple collaborating authors, most of whom do not engage with the experimental setup, further increase the risk of disparities between what experiments are run, and what the paper's described methodology and later results state.
+
+Lastly, it is often difficult for authors to ensure that their description of the experiments is not missing important context like the configuration parameters for the systems involved. Any missing context makes it difficult to reproduce the results. It is also non-trivial to connect text in the paper to the code for corresponding experiments within a large code repository.
+
+Some of these problems could be addressed if readers were able to tinker with authors' code. However, for the vast majority of reviewers and readers, such deep tinkering with the authors' code is neither desirable, nor even feasible --- in fact, for the typical paper, even its senior authors do not engage with the underlying code for the experiments.
+
+We propose to bridge the above gaps between papers and their underlying systems and experiments such that: (a) the paper's text itself determines what experiments are run; and (b) the paper's results and plots are the direct outputs of these experiments. 
+Reviewers and readers (and yes, senior authors) can then modify experiment settings/parameters in the text, and see the updated results without any need to understand the authors' code. The paper's text, the experiments that are run, and their results in the paper, are all consistent by design.
+
+Our approach, \sysname, uses a markup language in \LaTeX. The authors provide their experiment code and their paper's \LaTeX{} source. The authors use the markup in \LaTeX{} to annotate their experiments, and to create placeholders for results and plots. The same markup, minus its decorations, forms the paper text. \sysname uses the decoration to interpret the markup, and invokes the authors' experiment code to create the results. The outputs are post-processed with pipelines the authors provide to generate results and plots that replace their placeholders. 
+Any changes can be easily made to the authors' markup text describing the experiments, and the paper can be regenerated with new results and plots.
+
+This simple approach ensures that the same text that forms the body of a paper also describes the experiments that are run. Further, the results of these experiments automatically populate the text's plots and result-metrics. Making this work requires that authors use the markup appropriately and expose any parametrizable aspects of their experiment setup in this markup. However, there are healthy incentives to do so: (a) it helps authors ensure consistency and correctness; and (b) incomplete parametrization will prompt readers to question why some parametrizable aspects were not exposed.
+
+We showcase 3 examples where readers can benefit from \sysname's interactivity: experiments on congestion control, experiments on data center network traffic, and analyzing Internet measurements. Our analysis of the NSDI 2020 program indicates that $28\%$ of papers could directly benefit from \sysname's features along the lines of our showcases, by allowing readers to tinker with experiment settings, or enabling them to explore different facets of a substantial data set. Further, nearly all papers could use \sysname to help readers delve deeper into the experimental results.
+
+We also show \sysname's utility for teaching with an example on max-min fairness; students can interact with the example to learn the concept more deeply. Drawing on this idea, we hope to engage the community in collaboratively writing an \textit{interactive networking textbook}, making both algorithmic and systems concepts easy to explore for students.
+
+A video demo of \sysname is \href{https://drive.google.com/file/d/1f8gu3MpWzXM4WbpFLy7DXDcR4z3s6Ws9/view}{available online}.

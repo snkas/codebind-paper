@@ -1,0 +1,18 @@
+\section{\sysname's limitations}
+\label{sec:limitations}
+
+\sysname is a substantial step in improving the correctness, reproducibility, and usefulness of networking papers. Nevertheless, it has several limitations:
+
+\begin{itemize}[leftmargin=10pt,itemsep=2pt,topsep=2pt]
+
+    \item Not all experiments are easy to rerun, \eg due to custom hardware or constraints on runtime and resources needed. Cloud providers sponsoring resources to support reproducibility for top networking conferences could help, but ultimately, authors must carefully select which experiment setups to expose to readers with \sysname. Note that even for hard-to-rerun experiments, expincludes are still beneficial, as authors can expose different facets of their results, and allow readers to customize the data analysis.
+    
+    \item For some experiments, variance stems from real world artifacts. For instance, recent work revealed the performance variability in public cloud environments~\cite{nsdi-2020-uta}. Authors should convey what counts as a successful reproduction of their results by explicitly noting the expected range of variations, and thus set reader expectations accordingly. (This should be standard practice in any case.)
+    
+    \item Naturally, even a \sysname-enabled paper's readers are only limited to the experiments the authors frame and expose. Auto-generated plots may also have visual artifacts, which authors often adjust for manually in the particular results included. To overcome such problems, \sysname can be seen as an entry point for readers to engage with the authors' code through the interpreters and plotters.
+    
+    \item Authors draw conclusions and write descriptive text beyond just result metrics. When readers change experiments using \sysname, it is non-trivial for authors to have code in place to modify such text descriptions. \sysname can be seen as an attempt to push authors to draw conclusions robust to a variety of plausible experiment settings, but readers must also be forgiving of textual descriptions that do not tightly match the readers' tweaked experiments, especially for extreme parameter settings.
+    
+    \item \sysname only removes one source of inconsistencies and errors, namely those resulting from independent, manual evolution of experiments and their writing. Of course, the authors' run-scripts or other parts of their code-base can still contain bugs that \sysname does not help against.
+
+\end{itemize}

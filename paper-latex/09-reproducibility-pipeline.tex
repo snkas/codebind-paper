@@ -1,0 +1,10 @@
+\section{Reproducibility with \sysname}
+\label{sec:pipeline}
+
+\sysname enables reproducibility, such that: (a) the paper's text drives the author-supplied experiment code to regenerate the paper's results; and (b) the code corresponding to the results and text is easier to identify. Publication venues can also use it to \emph{enforce} reproducibility if desired, as follows.
+
+The authors submit two artifacts: the paper PDF and the code base. The code base comprises the paper's \LaTeX{} source, all experiment code, and two scripts: (1) \textit{setup\_env.sh}, which can recreate the authors' environment from scratch; and (2) \textit{reproduce.sh}, which can run the \sysname pipeline to regenerate the paper. Publication venues can archive pre-built environments produced from running \textit{setup\_env.sh}, if desirable, to guard against the code becoming obsolete due to evolution of the software dependencies in the environment.
+
+To ensure integrity, the two artifacts above can be irrevocably linked: the paper should include a pointer to the code base, together with a checksum across the code base in the paper's text. In the code base's copy of the paper \LaTeX{}, this checksum is set to zeroes to avoid a cyclic dependency. For our paper, this information is in the footnote on page 1.
+
+The reproducibility of a paper can be evaluated by comparing the output PDF from \sysname used on the environment built from scratch, to the authors' submitted document.  One can also evaluate what fraction of a paper is reproducible in a manner similar to how software projects evaluate coverage by test cases, using a continuous integration and delivery (CI/CD) methodology~\cite{redhat-ci-cd}. Mock-ups of what such a reproducibility evaluation might output are included in Appendix~\ref{appendix:reproducibility}.

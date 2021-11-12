@@ -1,0 +1,5 @@
+*.pyc
+analysis_qs_timedelta
+data
+pdf
+plot

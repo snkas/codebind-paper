@@ -1,0 +1,89 @@
+%%%%%%%%%%%%%%%%%
+% EXPERIMENTEX
+%
+% First, the five primary commands are defined.
+%
+% The ExperimenTeX commands are first interpreted and
+% turned into runs such that afterwards the missing
+% output plot files are present for the real LaTeX compilation.
+% If the interpreting and plotting have not taken place,
+% the LaTeX compilation will simply use placeholders.
+%
+% Second, two secondary commands related to checksums are defined.
+%
+
+% Package dependencies
+\usepackage{color}
+\usepackage{graphics}
+\usepackage{graphicx}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Format:       \expclass{name-sub}{name-super}
+%
+% Description:  Declare the existence of class [name-sub], which inherits
+%               from class [name-super]. This inheritance means it is of the same
+%               experiment type, and inherits all its explines.
+%
+%               In the rendered document, nothing is shown.
+%
+\newcommand{\expclass}[2]{}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Format:       \expinstance{name-inst}{name-super}
+%
+% Description:  Declare the existence of instance [name-inst], which inherits
+%               from class [name-super]. This inheritance means it is of the same
+%               experiment type, and inherits all its explines.
+%
+%               In the rendered document, nothing is shown.
+%
+\newcommand{\expinstance}[2]{}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Format:       \expline{name}{expline}
+%
+% Description:  Add [expline] to the list of explines of instance/class [name].
+%
+%               In the rendered document, it simply shows [expline] like any other text.
+%
+\newcommand{\expline}[3][]{{#3}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Format:       \expincludegraphics[ic-options]{exp-name}{output-file.ext}
+%
+% Description:  Add output.ext to the list of expinclude filenames of instance [name-inst].
+%
+%               In the rendered document, it behaves like \includegraphics.
+%               If the output file does not exist (yet), a placeholder image is depicted.
+%
+\newcommand{\expincludegraphics}[3][]{%
+\IfFileExists{../temp/plots/#2/#3}{%
+\includegraphics[#1]{../temp/plots/#2/#3}%
+}{%
+\includegraphics[#1]{example-image-a}%
+}%
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Format:       \expincludetext{exp-name}{output-file.ext}
+%
+% Description:  Add output.ext to the list of expinclude filenames of instance [name-inst].
+%
+%               In the rendered document, it behaves like \input.
+%               If the output file does not exist (yet), a placeholder red [X] is put.
+%
+\newcommand{\expincludetext}[2]{\IfFileExists{../temp/plots/#1/#2}{\input{../temp/plots/#1/#2}\unskip}{\textbf{\textcolor{red}{[\texttt{X}]}}}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Format:       \expcodecksum{}
+%
+% Description:  Code checksum (git commit hash or archive SHA-256)
+%               It is imported from file code-checksum.txt
+%
+\newcommand{\expcodechecksum}[0]{\IfFileExists{code-checksum.txt}{\input{code-checksum.txt}\unskip}{\textbf{\textcolor{red}{[\texttt{not found: code-checksum.txt}]}}}}

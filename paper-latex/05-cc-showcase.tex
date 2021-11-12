@@ -1,0 +1,101 @@
+\begin{figure*}[t]
+	\centering
+	\hspace*{\fill}%
+	\subfigure[TCP Cubic]{%
+		\label{fig:cc:together-cubic}%
+		\expincludegraphics[width=2.3in]{tcp-cubic}{plot_tcp_flow_time_vs_together_0.pdf}%
+	}%
+	\hfill%
+	\subfigure[TCP Vegas]{%
+		\label{fig:cc:together-vegas}%
+		\expincludegraphics[width=2.3in]{tcp-vegas}{plot_tcp_flow_time_vs_together_0.pdf}%
+	}%
+	\hfill%
+	\subfigure[DCTCP]{%
+		\label{fig:cc:together-dctcp}%
+		\expincludegraphics[width=2.3in]{tcp-dctcp}{plot_tcp_flow_time_vs_together_0.pdf}%
+	}%
+	\hspace*{\fill}\vspace{-2pt}%
+	\caption{\small \em Various TCP state variables over time for each of the congestion control protocols.}%\
+	\label{fig:cc:together}
+	\vspace{-6pt}
+\end{figure*}
+
+\begin{figure*}[t]
+	\centering%
+	\hspace*{\fill}%
+	\subfigure[TCP Cubic]{%
+		\label{fig:cc:rate-cubic}%
+		\expincludegraphics[width=2.3in]{tcp-cubic}{plot_tcp_flow_time_vs_rate_0.pdf}%
+	}%
+	\hfill%
+	\subfigure[TCP Vegas]{%
+		\label{fig:cc:rate-vegas}%
+		\expincludegraphics[width=2.3in]{tcp-vegas}{plot_tcp_flow_time_vs_rate_0.pdf}%
+	}%
+	\hfill%
+	\subfigure[DCTCP]{%
+		\label{fig:cc:rate-dctcp}%
+		\expincludegraphics[width=2.3in]{tcp-dctcp}{plot_tcp_flow_time_vs_rate_0.pdf}%
+	}%
+	\hspace*{\fill}\vspace{-2pt}%
+	\caption{\small \em Achieved rate over time for each of the congestion control protocols.}
+	\label{fig:cc:rate}
+	\vspace{-6pt}
+\end{figure*}
+
+\begin{figure*}[t]
+	\centering
+	\hspace*{\fill}%
+	\subfigure[TCP Cubic]{%
+		\label{fig:cc:rtt-cubic}%
+		\expincludegraphics[width=2.3in]{tcp-cubic}{plot_tcp_flow_time_vs_rtt_0.pdf}%
+	}%
+	\hfill%
+	\subfigure[TCP Vegas]{%
+		\label{fig:cc:rtt-vegas}%
+		\expincludegraphics[width=2.3in]{tcp-vegas}{plot_tcp_flow_time_vs_rtt_0.pdf}%
+	}%
+	\hfill%
+	\subfigure[DCTCP]{%
+		\label{fig:cc:rtt-dctcp}%
+		\expincludegraphics[width=2.3in]{tcp-dctcp}{plot_tcp_flow_time_vs_rtt_0.pdf}%
+	}%
+	\hspace*{\fill}\vspace{-2pt}%
+	\caption{\small \em Measured round-trip time (RTT) over time for each of the congestion control protocols.}
+	\label{fig:cc:rtt}
+	\vspace{-6pt}
+\end{figure*}
+
+\section{Showcase 1: congestion control}
+\label{sec:congestion-control}
+
+Congestion control protocols are designed to work in a wide range of network settings. However, in some circumstances they perform better than in others, \eg due to assumptions on delay or loss. For readers to gain a deeper understanding of congestion control protocols being proposed, they should be able to both vary the network settings as well as the parameters of the protocols. To this end, we present a simple scenario for which we investigate how various commonly known TCP variants perform. It gives the readers a direct way to interact with congestion control protocols and test their hypotheses -- without having to first be exposed to the code base of the underlying adaptation of the ns-3 packet-level simulator~\cite{ns3} with the basic-sim module~\cite{basic-sim}. All of the following experiments, in this showcase and the following two, are \sysname generated, so interested readers can tinker with them.
+
+\subsection{Experimental setup}
+\expclass{cc-one}{one-link-tcp}
+\parab{Topology.} We use a single link topology with two nodes.
+% One can edit the runtime in seconds.
+% E.g., another possibility: The experiment is run for 5~seconds.
+\expline{cc-one}{The experiment is run for 20~seconds.}
+% One can edit all the number values
+% E.g., another possibility: The link has the following properties: the channel has a delay of 90~ms, and its network devices have a data rate of 10~Mbit/s, 0.3\% random packet loss, and a FIFO queue of 32 packets.
+\expline{cc-one}{The link has the following properties: the channel has a delay of 20~ms, and its network devices have a data rate of 20~Mbit/s, 0.001\% random packet loss, and a FIFO queue of 50 packets.}
+% One can edit the queue size and the marking threshold.
+% E.g., another possibility: We set a random early detection (RED) queueing discipline with a maximum queue size of 45 packets and a binary marking (or drop if the IP packet does not support ECN) threshold at 20 packets.
+\expline{cc-one}{We set a random early detection (RED) queueing discipline with a maximum queue size of 100 packets and a binary marking (or drop if the IP packet does not support ECN) threshold at 50 packets.}
+
+\parab{Transport protocol.} We start a single uni-directional long-lasting TCP connection from the first node to the second. The init congestion window is \expline[init-cwnd-pkt]{cc-one}{10}, and the segment size \expline[segment-size]{cc-one}{1380~byte} (MTU is 1500 byte). The timestamp option is \expline[opt-timestamp]{cc-one}{enabled}, SACK is \expline[opt-sack]{cc-one}{enabled}, and window scaling is \expline[opt-win-scaling]{cc-one}{enabled}. No-delay (as in, disabling Nagle's algorithm) is \expline[no-delay]{cc-one}{enabled}. Pacing is \expline[opt-pacing]{cc-one}{disabled}. To increase the accuracy of RTT measurements, \expline{cc-one}{delayed acknowledgements are disabled}. The timing settings are as follows: maximum segment lifetime is set to \expline[max-seg-lifetime]{cc-one}{1~s}, minimum RTO to \expline[min-rto]{cc-one}{200~ms}, initial RTT estimate to \expline[initial-rtt-estimate]{cc-one}{400~ms}, connection timeout to \expline[connection-timeout]{cc-one}{400~ms}, and persist timeout to \expline[persist-timeout]{cc-one}{800~ms}. \expline{cc-one}{The send and receive buffer size are set to 1~GB} such that there is sufficient data available to accommodate large congestion windows.\footnote{Naturally, a long list of all parameters involved can make for tiresome reading. Authors can decide if certain parameters are completely irrelevant and omit them entirely from the text; however, they must weigh the risk that readers do not agree with the authors' omissions.}
+
+\subsection{Results}
+
+\expinstance{tcp-cubic}{cc-one}
+\noindent\textbf{\expline{tcp-cubic}{TCP Cubic}} is a loss-based protocol; packets will be dropped when the combined queue size of the network device (\expincludetext{tcp-cubic}{ndq-size-pkt.txt}) and the threshold of the RED queuing discipline (\expincludetext{tcp-cubic}{qdisc-threshold-pkt.txt}) on top of the bandwidth delay product are exceeded (\expincludetext{tcp-cubic}{bdp-pkt.txt}). As such, each time the congestion window reaches around \expincludetext{tcp-cubic}{ndq-qdisc-bdp-pkt.txt} in Fig.~\ref{fig:cc:together-cubic}, a loss occurs and the congestion window is cut. TCP Cubic achieves an average rate of \expincludetext{tcp-cubic}{average-rate-Mbps.txt}~Mbit/s, and an average RTT of \expincludetext{tcp-cubic}{average-rtt-ms.txt}~ms.
+
+\expinstance{tcp-vegas}{cc-one}
+\parab{\expline{tcp-vegas}{TCP Vegas}.} TCP Vegas is a delay-based protocol, and will only grow its congestion window if it does not increase RTT. Thus, if the congestion window is larger than the bandwidth-delay product (\expincludetext{tcp-vegas}{bdp-pkt.txt}), the congestion window will not grow as it would increase the RTT due to additional queueing delay (see Fig.~\ref{fig:cc:together-vegas}). TCP Vegas achieves an average rate of \expincludetext{tcp-vegas}{average-rate-Mbps.txt}~Mbit/s, and an average RTT of \expincludetext{tcp-vegas}{average-rtt-ms.txt}~ms.
+
+\expinstance{tcp-dctcp}{cc-one}
+\parab{\expline{tcp-dctcp}{DCTCP}.} It makes clever use of marked early congestion notifications (ECN) to limit the amount of queueing it causes in the network. As a consequence, it maintains the same queue size and does not do the aggressive reductions as exhibited by TCP Cubic. Its congestion window as such hovers around \expincludetext{tcp-dctcp}{ndq-qdisc-bdp-pkt.txt} (see Fig.~\ref{fig:cc:together-dctcp}). DCTCP achieves an average rate of \expincludetext{tcp-dctcp}{average-rate-Mbps.txt}~Mbit/s, and an average RTT of \expincludetext{tcp-dctcp}{average-rtt-ms.txt}~ms.
+
+\greybox{\textbf{Behind the scenes:} In the LaTeX source code all the network settings are editable (\eg channel delay, device data rate, ...). If you change their values in the LaTeX and execute the reproduce pipeline, all the figures (Fig.~\ref{fig:cc:together}, \ref{fig:cc:rate} and \ref{fig:cc:rtt}) and all the metrics mentioned in-text (\eg bandwidth-delay product, average rate, average RTT, ...) will be automatically updated.}

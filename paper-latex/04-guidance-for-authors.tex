@@ -1,0 +1,33 @@
+\section{Guidance for authors}
+\label{sec:guidance-for-authors}
+
+To maintain its applicability to a variety of experiment types, \sysname is designed to function as scaffolding for the authors' experiment framework(s). Authors use the simple \experimentex markup in their \LaTeX{} writeup, and implement two additional components besides their usual experiment framework(s): interpreters and plotters. These are just hooks to run-scripts and post-processing routines authors would write anyway, but nevertheless, based on our experience using \sysname, we offer guidance for authors for using \experimentex markup and for writing interpreters and plotters.
+
+\subsection{Writing order and strategy}
+\label{sec:writing-strategy}
+
+\begin{enumerate}[leftmargin=12pt,itemsep=2pt,topsep=2pt]
+    \item Consider which types of experiments (\textit{expclasses}) will exist, and what their relevant parameters are;
+    \item Consider which concrete experiments (\textit{expinstances}) will be run, and if they have overlaps that could benefit from defining shared \textit{expclasses} to inherit from;
+    \item Envelop the sentences which describe the experiment setup, such as parameters, with \textit{explines};
+    \item Represent text (\eg words, metrics) which depends on experimental results using \textit{expincludetext} commands;
+    \item Represent figures which depend on experimental results using \textit{expincludegraphics} commands.
+\end{enumerate}
+
+\noindent Once authors have an initial draft, they can start with implementing an interpreter and plotter. They can then continue iterating, cycling between: (a) writing new text with new or modified explines and expincludes; (b) extending the interpreter to incorporate the explines; (c) extending the plotter to be able to satisfy the new expincludes; and potentially also (d) extending or adding running frameworks.
+
+\subsection{Best practices}
+\label{sec:best-practices}
+
+We formulate the following design principles to guide authors towards productive use of \sysname:
+
+\begin{itemize}[leftmargin=10pt,itemsep=2pt,topsep=2pt]
+    \item For transparency and consistency, make runs self-contained, using input configuration files only in the run directory.
+    \item For determinism and reproducibility, control randomness via seed parameters. For conducting multiple runs for statistical confidence, a list of seed attributes can be used.
+    \item To maximize interactivity for readers, expose any parameters and settings that may influence the results via \textit{explines}. Explines should be intuitive and easy to edit, and not overly sensitive to whitespace, capitalization, punctuation, etc.
+    \item For consistency of the writeup, use \textit{expincludes} for all possible result values in text, and for result plots.
+    \item Use \LaTeX{} comments around markup to indicate acceptable values for parameters, options for system configuration, which result metrics / plots can be generated, etc.
+\end{itemize}
+
+
+\noindent \sysname does not preclude the use of collaborative online \LaTeX{} editors, but using it in this setting requires that at least one author additionally use an environment that can run \sysname and the authors' experiment frameworks, and manually upload the generated output files. This inconvenience could be overcome by a future extended collaborative editing service that additionally uses cloud resources to enable \sysname on the same platform.

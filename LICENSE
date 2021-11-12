@@ -1,0 +1,141 @@
+NS-3
+----------
+Framework ns-3-bs is licensed under the GNU GPL v2.
+
+Directory: frameworks/ns-3-bs
+More information: frameworks/ns-3-bs/LICENSE
+
+NS-3 BASIC-SIM MODULE
+----------
+The ns-3 basic-sim module is licensed under the GNU GPL v2.
+
+URL: https://github.com/snkas/basic-sim
+Directory: frameworks/ns-3-bs/ns-3/contrib/basic-sim
+More information: frameworks/ns-3-bs/ns-3/contrib/basic-sim/LICENSE
+                  frameworks/ns-3-bs/ns-3/contrib/basic-sim/README.md
+
+TOP-LISTS
+----------
+Framework top-lists is licensed under the by-sa, http://creativecommons.org/licenses/by-sa/4.0 (Attribution-ShareAlike 4.0 International)
+Independent created based on the code and dataset made available by:
+Quirin Scheitle, Oliver Hohlfeld, Julien Gamba, Jonas Jelten, Torsten Zimmermann, Stephen D. Strowes, and Narseo Vallina-Rodriguez. 2018.
+A Long Way to the Top: Significance, Structure, and Stability of Internet Top Lists.
+In Proceedings of the Internet Measurement Conference 2018 (IMC '18). Association for Computing Machinery, New York, NY, USA, 478–493.
+DOI:https://doi.org/10.1145/3278532.3278574
+
+Directory: frameworks/top-lists
+More information: frameworks/top-lists/LICENSE and frameworks/top-lists/README.md
+
+LATEX CLASS FILES
+---
+The paper style used is the one provided by ACM under the LaTeX Project Public License version 1.3 or later.
+Files: paper-latex/acmart.cls
+       paper-latex/acmart.dtx (source file with full license; unused in project as acmart.cls is directly used)
+       paper-latex/ACM-Reference-Format.bst
+       paper-latex/paper.tex (based on sample-sigconf.tex)
+More information: paper-latex/acmart.dtx
+
+Copyright 2016-2021, Association for Computing Machinery
+This work may be distributed and/or modified under the
+conditions of the LaTeX Project Public License, either
+version 1.3 of this license or (at your option) any
+later version.
+The latest version of the license is in
+   http://www.latex-project.org/lppl.txt
+and version 1.3 or later is part of all distributions of
+LaTeX version 2005/12/01 or later.
+
+This work has the LPPL maintenance status `maintained'.
+
+The Current Maintainer of this work is Boris Veytsman,
+<borisv@lk.net>
+
+This work consists of the file acmart.dtx, the derived file
+acmart.cls, the files ACM-Reference-Format.bst, and templates
+sample-acmlarge.tex, sample-acmsmall.tex, sample-acmtog.tex,
+samplebody-conf.tex, samplebody-journals.tex, sample-manuscript.tex,
+sample-sigconf-authordraft.tex, sample-sigconf.tex,
+sample-sigplan.tex
+
+GNUPLOT FILES
+---
+Some gnuplot files are licensed under the MIT license.
+Directory: experimentex/rootclasses/gnuplot
+More information: experimentex/rootclasses/gnuplot/MIT_LICENSE
+
+The MIT License (MIT)
+
+Copyright (c) 2020  Simon Kassing
+Copyright (c) 2014  Ankit Singla, Sangeetha Abdu Jyothi, Chi-Yao Hong,
+                    Lucian Popa, P. Brighten Godfrey, Alexandra Koll
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+EXPUTILPY
+---
+Directory: experimentex/exputilpy
+More information: experimentex/exputilpy/LICENSE
+
+The MIT License (MIT)
+
+Copyright (c) 2019 snkas
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+OTHER
+----------
+All other files are licensed under the MIT License unless otherwise stated:
+
+MIT License
+
+Copyright (c) 2021 ETH Zurich
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.

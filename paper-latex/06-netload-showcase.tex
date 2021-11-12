@@ -1,0 +1,225 @@
+
+\begin{figure*}[t]
+
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    % CODEBIND HELP NOTES
+    %
+    % For each of the below figures, the format is as follows:
+    % plot_target_load_vs_tcp_flows_[small/large]_fct_ns_[statistic].pdf
+    % OR:
+    % plot_target_load_vs_tcp_flows_[small/large]_avg_throughput_megabit_per_s_[statistic].pdf
+    %
+    % With [statistic] can be any of the following:
+    % min
+    % 0_1th
+    % 1th
+    % 10th
+    % median
+    % mean
+    % 90th
+    % 99th
+    % 99_9th
+    % max
+    %
+    
+	\centering
+	\hspace*{\fill}%
+	\subfigure[Average FCT]{%
+		\label{fig:netload:small:average-fct}%
+		\expincludegraphics[width=1.75in]{load-ls-main}{plot_target_load_vs_tcp_flows_small_fct_ns_average.pdf}%
+	}%
+	\hfill%
+	\subfigure[99th \%-tile FCT]{%
+		\label{fig:netload:small:99th-fct}%
+		\expincludegraphics[width=1.75in]{load-ls-main}{plot_target_load_vs_tcp_flows_small_fct_ns_99th_percentile.pdf}%
+	}%
+	\hfill%
+	\subfigure[Average throughput]{%
+		\label{fig:netload:small:average-rate}%
+		\expincludegraphics[width=1.75in]{load-ls-main}{plot_target_load_vs_tcp_flows_small_avg_throughput_megabit_per_s_average.pdf}%
+	}%
+	\hfill%
+	\subfigure[1th \%-tile throughput]{%
+		\label{fig:netload:small:1th-rate}%
+		\expincludegraphics[width=1.75in]{load-ls-main}{plot_target_load_vs_tcp_flows_small_avg_throughput_megabit_per_s_1th_percentile.pdf}%
+	}%
+	\hspace*{\fill}\vspace{-4pt}%
+	\caption{\small \em Performance of the small TCP flows. Each line point is the average of the metric across runs, the vertical bar around it are the minimum and maximum.}
+	\label{fig:netload:small}
+	\vspace{4pt}%
+
+	\hspace*{\fill}%
+	\subfigure[Average FCT]{%
+		\label{fig:netload:large:average-fct}%
+		\expincludegraphics[width=1.75in]{load-ls-main}{plot_target_load_vs_tcp_flows_large_fct_ns_average.pdf}%
+	}%
+	\hfill%
+	\subfigure[99th \%-tile FCT]{%
+		\label{fig:netload:large:99th-fct}%
+		\expincludegraphics[width=1.75in]{load-ls-main}{plot_target_load_vs_tcp_flows_large_fct_ns_99th_percentile.pdf}%
+	}%
+	\hfill%
+	\subfigure[Average throughput]{%
+		\label{fig:netload:large:average-rate}%
+		\expincludegraphics[width=1.75in]{load-ls-main}{plot_target_load_vs_tcp_flows_large_avg_throughput_megabit_per_s_average.pdf}%
+	}%
+	\hfill%
+	\subfigure[1th \%-tile throughput]{%
+		\label{fig:netload:large:1th-rate}%
+		\expincludegraphics[width=1.75in]{load-ls-main}{plot_target_load_vs_tcp_flows_large_avg_throughput_megabit_per_s_1th_percentile.pdf}%
+	}%
+	\hspace*{\fill}\vspace{-4pt}%
+	\caption{\small \em Performance of the large TCP flows. Each line point is the average of the metric across runs, the vertical bar around it are the minimum and maximum.}
+	\label{fig:netload:large}
+	\vspace{-6pt}
+\end{figure*}
+
+\section{Showcase 2: DC experiments}
+\label{sec:netload}
+
+\expinstance{load-ls-main}{load-ls}
+Next, instead of focusing on a single connection as in \S\ref{sec:congestion-control}, we evaluate the performance of an entire network using ns-3~\cite{ns3} with the basic-sim module~\cite{basic-sim}. We want to show the network performance for a workload consisting of a mix of small and large flows. We want to make a comparison between two settings: one in which all flows are treated equal, and the other in which the small flows are prioritized absolutely over the large flows
+
+\parab{Network topology.} The network is a leaf-spine topology, in which each leaf is connected to every spine. The leaves are top-of-rack (ToR) switches which connect each to a set of servers. \expline{load-ls-main}{There are 2 spines and 3 leaves.} \expline{load-ls-main}{Each leaf (ToR) has 3 servers underneath.} \expline{load-ls-main}{Every link has the following properties: the channel has a delay of 20~$\mu s$, and its network devices have a data rate of 100~Mbit/s, 0.001\% random packet loss, and a FIFO queue of 5 packets.} \expline{load-ls-main}{We set pfifo\_fast as the queueing discipline with a maximum total queue size of 200 packets.}
+
+\parab{Transport protocol.} \expline{load-ls-main}{We set TCP Cubic as the congestion control protocol.} The initial congestion window is set to \expline[init-cwnd-pkt]{load-ls-main}{10}, and the segment size to \expline[segment-size]{load-ls-main}{1380~byte} (MTU is 1500 byte). The timestamp option is \expline[opt-timestamp]{load-ls-main}{enabled}, SACK option is \expline[opt-sack]{load-ls-main}{enabled}, and window scaling is \expline[opt-win-scaling]{load-ls-main}{enabled}. No-delay (as in, disabling Nagle's algorithm) is \expline[no-delay]{load-ls-main}{enabled}. Pacing is \expline[opt-pacing]{load-ls-main}{disabled}. To increase the accuracy of RTT measurements, \expline{load-ls-main}{delayed acknowledgements are disabled}. The timing settings are as follows: maximum segment lifetime is set to \expline[max-seg-lifetime]{load-ls-main}{1~s}, minimum RTO to \expline[min-rto]{load-ls-main}{200~ms}, initial RTT estimate to \expline[initial-rtt-estimate]{load-ls-main}{400~ms}, connection timeout to \expline[connection-timeout]{load-ls-main}{400~ms}, and persist timeout to \expline[persist-timeout]{load-ls-main}{800~ms}. \expline{load-ls-main}{The send and receive buffer size are set to 1~GB} such that there is sufficient data available to accommodate large congestion windows.\footnote{To avoid the redundancy in the text here, which is similar to the previous showcase, we could use inheritance from the same class. For this paper, we wanted to keep the showcases self-contained, so we did not take this route.}
+
+\parab{Workload.} The workload consists of uni-directional TCP flows, and is modeled after the approach of HULL~\cite{hull}, albeit with a simpler Bernoulli flow size distribution. We use a Poisson process to determine the inter-arrival rate $\lambda$. For each flow, the source and destination server are chosen uniformly at random. \expline{load-ls-main}{The flow size is randomly chosen to be either small (50~KB) with 90\% probability, or large (4~MB) with 10\% probability.} Under the all-to-all traffic pattern, the leaf-spine network becomes bottlenecked most optimistically at \expincludetext{load-ls-main}{bottleneck-Mbps.txt}~Mb/s. We model target load with respect to this bottleneck limit by expressing the target load as a fraction of it. \expline{load-ls-main}{We vary the target load from 5\% till 60\% in increments of 5\%.} With the used flow size distribution (with mean flow size \expincludetext{load-ls-main}{mean-flow-size.txt}), this equates to varying the Poisson flow arrival rate $\lambda$ from \expincludetext{load-ls-main}{lambda-lowest.txt}~flow/s till \expincludetext{load-ls-main}{lambda-highest.txt}~flow/s in approximate steps of \expincludetext{load-ls-main}{lambda-step.txt}~flow/s. \expline{load-ls-main}{Only the flows which start in the measurement period are included in the result: the flows which started in the warm-up period of the first 5~seconds and the cool-down period of the last 20~seconds are not taken into account.} \expline{load-ls-main}{The experiment is configured such that in expectation 4000 flows start in the measurement period.} However, of those, only the flows which finished were incorporated in the result as it is undefined what the FCT for an incomplete flow is. \expline{load-ls-main}{Each load point is run for 5 times, with a reproducible initial random seed based on the (SHA-256) hash of its unique run configuration.}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% CODEBIND HELP NOTES
+%
+% Expincludes:
+%
+% Format:  lambda-[load].txt
+% Example: lambda-10.txt
+% Prints:  Flow arrival rate in flows/s
+%
+% DIRECT VALUES
+% ---
+%
+% Format:  load-[load]-[equal/prioritized]-[all/small/large]-fct-[statistic].txt
+% Example: load-20-equal-vs-prioritized-all-fct-max.txt
+% Prints:  Speed-up
+%
+% Format:  load-[load]-[equal/prioritized]-[all/small/large]-throughput-[statistic].txt
+% Example: load-20-equal-all-throughput-max.txt
+% Prints:  Speed-up
+%
+% Format:  load-[load]-[equal/prioritized]-[server-leaf/leaf-spine]-utilization-[statistic].txt
+% Example: load-20-equal-leaf-spine-utilization-max.txt
+%
+% FOR A CERTAIN LOAD, SPEED-UP OF EQUAL VS. PRIORITIZED
+% ---
+%
+% Format:  load-[load]-[equal/prioritized]-vs-[equal/prioritized]-[all/small/large]-fct-[statistic].txt
+% Example: load-20-equal-vs-prioritized-all-fct-max.txt
+% Prints:  Speed-up
+%
+% Format:  load-[load]-[equal/prioritized]-vs-[equal/prioritized]-[all/small/large]-throughput-[statistic].txt
+% Example: load-20-equal-vs-prioritized-all-throughput-max.txt
+% Prints:  Speed-up
+%
+% Format:  load-[load]-[equal/prioritized]-vs-[equal/prioritized]-[server-leaf/leaf-spine]-utilization-[statistic].txt
+% Example: load-20-equal-vs-prioritized-leaf-spine-utilization-max.txt
+% Prints:  Increase ("speed-up")
+%
+% FOR A CERTAIN EQUAL OR PRIORITIZED, SPEED-UP ACROSS LOADS
+% ---
+%
+% Format:  load-[loadA]-vs-loadB]-[equal/prioritized]-[all/small/large]-fct-[statistic].txt
+% Example: load-20-vs-30-equal-all-fct-max.txt
+% Prints:  Speed-up
+%
+% Format:  load-[loadA]-vs-loadB]-[equal/prioritized]-[all/small/large]-throughput-[statistic].txt
+% Example: load-20-vs-30-prioritized-all-throughput-max.txt
+% Prints:  Speed-up
+%
+% Format:  load-[loadA]-vs-loadB]-[equal/prioritized]-[server-leaf/leaf-spine]-utilization-[statistic].txt
+% Example: load-20-vs-30-prioritized-leaf-spine-utilization-max.txt
+% Prints:  Increase ("speed-up")
+%
+% With [statistic] can be any of the following:
+% min
+% 0-1th
+% 1th
+% 10th
+% median
+% mean
+% 90th
+% 99th
+% 99-9th
+% max
+%
+
+\parab{Small flows are significantly sped up.} The small flows complete in a few round-trips. However, if their packets get stuck behind packets of larger flows, this can drastically increase flow completion time. By prioritizing these small flows (given they only take up \expincludetext{load-ls-main}{small-flow-size-total-percentage.txt}\% of the total bytes), their performance drastically improves. At 10\% target load, prioritized small flows achieve a speed-up factor of \expincludetext{load-ls-main}{load-10-equal-vs-prioritized-small-fct-average.txt}$\times$ on average FCT and \expincludetext{load-ls-main}{load-10-equal-vs-prioritized-small-fct-99th-percentile.txt}$\times$ at the 99th \%-tile FCT. At higher target loads, the speed-up becomes even more apparent (see Fig.~\ref{fig:netload:small}).
+
+\parab{Large flows are not impacted much.} The large flows make up the bulk of the total workload bytes (\expincludetext{load-ls-main}{large-flow-size-total-percentage.txt}\%). The large flows are \expincludetext{load-ls-main}{large-flow-size-divided-small-flow-size.txt}$\times$ larger than that of their smaller workload counterparts, and as such, there are significantly fewer of them (\expincludetext{load-ls-main}{ratio-small-large-flows.txt}). Because of their size, they require many round-trips to complete, and are present longer in the network. All these factors combined lighten the impact if one prioritizes small flows over them. At 10\% target load, the prioritization of small flows only causes on average a speedup of the large flows of \expincludetext{load-ls-main}{load-10-equal-vs-prioritized-large-fct-average.txt}$\times$ on average FCT and \expincludetext{load-ls-main}{load-10-equal-vs-prioritized-large-fct-99th-percentile.txt}$\times$ at the 99th \%-tile FCT. (Speedup below one implies slowdown.)
+
+\parab{FCT vs. throughput.} There is an inverse relationship between FCT and rate. As such, there is a direct relationship between $x$th \%-tile FCT and $(100 - x)$th \%-tile rate (see Fig.~\ref{fig:netload:large:99th-fct}/\ref{fig:netload:large:1th-rate}). However, it is a non-linear function, as such there is no linear relationship between the average FCT and the average rate (see Fig.~\ref{fig:netload:large:average-fct}/\ref{fig:netload:large:average-rate}).
+
+\parab{Network performance degrades near saturation.} The workload is a product of three random processes which (by design) do not spread perfectly. The target flow arrival rate only guarantees that it averages out over time. However, as the arrival rate approaches the service rate of the network (the total bandwidth given the traffic pattern), the flow completion time will increase more. In the equal priority setting, increasing the load from 10\% to 30\% results in a \expincludetext{load-ls-main}{load-10-vs-30-equal-all-fct-average.txt}$\times$ speedup for the large flow average FCT, whereas increasing from 30\% to 50\% results in a \expincludetext{load-ls-main}{load-30-vs-50-equal-all-fct-average.txt}$\times$ speedup. The cool-down period of \expincludetext{load-ls-main}{cool-down-s.txt}~s is crucial to be able to take into account even the slowest of large flow completions. This is shown by the near 100\% completion fraction across flows for all loads in Fig.~\ref{fig:netload:completed}.
+
+\begin{figure}
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    % CODEBIND HELP NOTES
+    %
+    % For each of the below figures, the format is as follows:
+    % plot_target_load_vs_tcp_flows_[small/large]_fraction_completed.pdf
+    %
+    \centering%
+    \hspace*{\fill}%
+    \subfigure[Small flows]{%
+        \label{fig:netload:completed:small}%
+        \expincludegraphics[width=1.65in]{load-ls-main}{plot_target_load_vs_tcp_flows_small_fraction_completed.pdf}%
+    }%
+    \hfill%
+    \subfigure[Large flows]{%
+        \label{fig:netload:completed:large}%
+        \expincludegraphics[width=1.65in]{load-ls-main}{plot_target_load_vs_tcp_flows_large_fraction_completed.pdf}%
+    }%
+    \hspace*{\fill}\vspace{-3pt}%
+    \caption{\small \em Amount of both types of flows which were completed.}%
+    \label{fig:netload:completed}%
+    \vspace{-7pt}%
+\end{figure}
+
+\parab{Target load vs. actual load.} The aforementioned bottleneck (\expincludetext{load-ls-main}{bottleneck-Mbps.txt}~Mb/s) against which we normalize target load is very optimistic for 3 reasons: (a) it does not account for additionally header and acknowledgement overhead, which adds additional load beyond that of payload; (b) the load is a result of three random processes and as such can lead to hot spots causing the network to be saturated earlier; and (c) TCP and ECMP are not always able to take full advantage of the network's capacity. To illustrate this, in Fig.~\ref{fig:netload:utilization:server-leaf} and Fig.~\ref{fig:netload:utilization:leaf-spine} we show the utilization of the server-leaf and leaf-spine links. At $\lambda=\expincludetext{load-ls-main}{lambda-40.txt}\text{~flows/s}$ the target load is 40\%, but the \textit{average} maximum link utilization is \expincludetext{load-ls-main}{load-40-equal-server-leaf-utilization-max.txt}\% (server-leaf) and \expincludetext{load-ls-main}{load-40-equal-leaf-spine-utilization-max.txt}\% (leaf-spine).
+
+\begin{figure}
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    % CODEBIND HELP NOTES
+    %
+    % For each of the below figures, the format is as follows:
+    % plot_target_load_vs_[server_leaf/leaf_spine]_link_utilization_fraction_[statistic].pdf
+    %
+    % With [statistic] can be any of the following:
+    % min
+    % 0_1th
+    % 1th
+    % 10th
+    % median
+    % mean
+    % 90th
+    % 99th
+    % 99_9th
+    % max
+    %
+	\centering
+	\hspace*{\fill}%
+	\subfigure[Server-leaf links]{%
+		\label{fig:netload:utilization:server-leaf}%
+		\expincludegraphics[width=1.65in]{load-ls-main}{plot_target_load_vs_server_leaf_link_utilization_fraction_max.pdf}%
+	}%
+	\hfill%
+	\subfigure[Leaf-spine links]{%
+		\label{fig:netload:utilization:leaf-spine}%
+		\expincludegraphics[width=1.65in]{load-ls-main}{plot_target_load_vs_leaf_spine_link_utilization_fraction_max.pdf}%
+	}%
+	\hspace*{\fill}\vspace{-3pt}%
+	\caption{\small \em Network utilization as the workload intensifies.}
+	\label{fig:netload:utilization}
+	\vspace{-7pt}
+\end{figure}
+
+\greybox{\textbf{Behind the scenes:} In the LaTeX source code it is possible to up or down scale the size of the network, as well as vary the load put upon it. However, as one increases the scale or load, the experiments will take longer to complete. Both the workload characteristics as well as the performance metrics (\eg FCT, throughput, ...) are automatically updated based on the experimental setup defined.}

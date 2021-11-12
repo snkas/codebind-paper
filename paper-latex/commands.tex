@@ -1,0 +1,133 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% PACKAGES
+
+\usepackage{booktabs} % For formal tables
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{mdframed}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{nicefrac}
+\usepackage{balance}
+\usepackage{subfigure}
+\usepackage{lipsum}
+\usepackage{outlines}
+\usepackage{comment}
+\usepackage{xcolor}
+\usepackage{amsmath}
+%\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{url}
+\usepackage{pifont}
+%\usepackage[allcolors=magenta]{hyperref}
+\usepackage{xspace}
+\usepackage{graphics}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{outlines}
+\usepackage{textcomp,gensymb}
+\usepackage{xurl}
+\usepackage{enumerate}
+\usepackage{stfloats}
+\usepackage{tikz}
+\usepackage{enumitem}
+
+\usepackage[normalem]{ulem} % Enables strikeout text
+
+\mdfdefinestyle{annotex}{
+    backgroundcolor=gray!10,
+    innerleftmargin=0.15cm,
+    innerrightmargin=0.15cm,
+    leftmargin=0cm,
+    rightmargin=0cm,
+    font=\normalsize
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% ADDITIONAL COMMANDS
+
+% Text
+
+% I.e.,
+\newcommand{\ie}{{\it i.e.,}\xspace}
+
+% E.g.,
+\newcommand{\eg}{{\it e.g.,}\xspace}
+
+% Math
+\newcommand{\BigO}{\mathcal{O}}
+
+% Additional table alignment
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\arraybackslash}p{#1}}
+
+%%%% Grey box
+
+\definecolor{lightgray}{gray}{0.92}
+\fboxsep2pt
+\newcommand\greybox[1]{%
+\vspace{6pt}%
+  %\vskip 2pt%
+      \par{\centering\colorbox{lightgray}{%
+              \begin{minipage}{3.3in}#1\end{minipage}%
+                        }%
+                                    \vskip 2pt%
+                                    \vspace{1pt}%
+                                                }}
+%%%%%%%%%%%
+
+% Comments
+\newcommand{\fix}[1]{{\textcolor{red}{[#1]}}}
+
+\newcommand{\old}[1]{\textbf{{\textcolor{red}{#1}}}}
+\newcommand{\new}[1]{\textbf{{\textcolor{blue}{#1}}}}
+
+% Paragraph starts
+\newcommand{\pstartbold}[1]{\noindent\textbf{{#1}}}
+\newcommand{\pstartboldind}[1]{\vspace{0.05in}\noindent\textbf{{#1}}}
+\newcommand{\pstartit}[1]{\noindent\textbf{{#1}}}
+\newcommand{\pstartitind}[1]{\vspace{0.05in}\noindent\textbf{{#1}}}
+\newcommand{\parab}[1]{\vspace{0.03in}\noindent{\bf #1}}
+
+%% section/subsection spacing
+\usepackage{titlesec}
+\titlespacing*{\section}
+{0pt}{1.2ex plus .2ex minus .2ex}{0.1ex plus .1ex}
+\titlespacing*{\subsection}
+{0pt}{.6ex plus .2ex minus .2ex}{0.1ex plus .05ex}
+\titleformat*{\section}{\large\bfseries\scshape}
+
+% This stops latex from leaving large spaces around figures in a column
+\renewcommand{\textfraction}{0}
+\renewcommand{\topfraction}{1}
+\renewcommand{\bottomfraction}{1}
+\setcounter{totalnumber}{10}
+\setcounter{topnumber}{10}
+\setcounter{bottomnumber}{10}
+\setcounter{dbltopnumber}{10}
+\renewcommand{\floatpagefraction}{1}
+\renewcommand{\dblfloatpagefraction}{1}
+
+% Footnote without marker
+\newcommand\markerlessfootnote[1]{%
+	\begingroup%
+	\renewcommand\thefootnote{}\footnote{#1}%
+	\addtocounter{footnote}{-1}%
+	\endgroup%
+}
+
+% System name
+\newcommand{\sysname}{\textsc{CodeBind}\xspace}
+
+% ExperimenTeX
+\newcommand{\experimentex}{\textsc{ExperimenTeX}\xspace}
+
+\RequirePackage{caption, float}
+\captionsetup[figure]{name={Fig.}}
+\captionsetup{labelfont={bf},
+    textfont={it}, labelsep=colon}
+
+% Remove excessive space around figures
+\setlength{\abovecaptionskip}{3pt plus 2pt minus 2pt}
+\setlength{\belowcaptionskip}{-5pt plus 2pt minus 2pt}

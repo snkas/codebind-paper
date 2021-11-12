@@ -1,0 +1,82 @@
+\section{Running example: max-min fairness}
+\label{sec:example}
+
+Consider a text intended to explain the idea of max-min fairness to students. One part of this text, explaining a consequence of max-min fairness, may read as follows:
+
+\vspace{0.2cm}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{mdframed}[style=annotex]
+
+Under max-min fairness, the addition of flows to the network can \emph{increase} the throughput of some flows.
+
+\expclass{abc}{mmfa}
+To demonstrate this, we use a simple topology of three nodes with two directed edges:
+\expline{abc}{the edge from A to B has a capacity of 1 unit},
+and the \expline{abc}{the edge from B to C has a capacity of 1 unit}.
+
+\expinstance{abc-one}{abc}
+In the first experiment, we start the following flows: \expline{abc-one}{one from A to B} (path is A$\rightarrow$B), \expline{abc-one}{one from B to C} (path is B$\rightarrow$C), and \expline{abc-one}{one from A to C} (path is A$\rightarrow$B$\rightarrow$C).
+This results in a max-min fair allocation of \expincludetext{abc-one}{flow-allocation-A-B.txt}, \expincludetext{abc-one}{flow-allocation-B-C.txt} and \expincludetext{abc-one}{flow-allocation-A-C.txt} for each.
+
+\vspace{-0.0in}
+\begin{center}
+% Source file: figures/topology-example.drawio
+\includegraphics[width=2.5cm]{figures/topology-example.pdf}
+\end{center}
+\vspace{-0.0in}
+
+\expinstance{abc-vary}{abc}
+\noindent However, say we increase the number of flows from A to B. What would happen to the flow from B to C? In the second experiment, as before, we start \expline{abc-vary}{one flow from B to C} and \expline{abc-vary}{one flow from A to C}. \expline{abc-vary}{We vary the number of flows from A to B between 1 and 4}. The addition of extra flows from A to B results in the flow from A to C being bottlenecked there, resulting in the flow from B to C being allocated more.
+
+\begin{center}
+\expincludegraphics[width=4.7cm]{abc-vary}
+{num-flows-A-B-vs-flow-allocation-B-C.pdf}
+\end{center}
+
+\end{mdframed}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\vspace{0.2cm}
+
+\noindent A reader can tinker with this example in several ways, including changing the capacities of the links in the topology and the number of flows between various nodes. For instance, to examine the impact of changing the capacity of the A$\rightarrow$B link to 3 units, they can edit the following line in the \LaTeX{} code:
+
+\vspace{0.05in}
+\texttt{the edge from A to B has a capacity of \old{\sout{1}} \new{3}}
+\vspace{0.05in}
+
+\noindent Similarly, to change the number of flows from A$\rightarrow$B across a wider range than above, they can edit this line:
+
+\vspace{0.05in}
+\texttt{We vary the number of flows from A to B}
+
+\texttt{between \old{\sout{1 and 4}} \new{0 and 10}}
+\vspace{0.05in}
+
+\noindent After these small edits, the reader executes a single `refresh' command. \sysname runs the new experiments, generates plots, and inserts them to generate a new PDF document. Everything else remains as in the previous text, except the following parts that are modified, together with the new plot:
+
+\vspace{0.2cm}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% NOTE: the underneath LaTeX is in a comment block, just because we do not want to simply copy-paste all the above LaTeX text to conserve space. This is done only because this is a paper *about* ExperimenTeX and we want to show how it would work.
+\begin{comment}
+\expclass{abc2}{mmfa}
+\expline{abc2}{the edge from A to B has a capacity of 3 unit},
+\expline{abc2}{the edge from B to C has a capacity of 1 unit}.
+\expinstance{abc-vary2}{abc2}
+\expline{abc-vary2}{one flow from B to C}
+\expline{abc-vary2}{one flow from A to C}
+\expline{abc-vary2}{We vary the number of flows from A to B between 0 and 10}
+\end{comment}
+
+\begin{mdframed}[style=annotex]
+\ldots the edge from A to B has a capacity of \textbf{3} \ldots\\
+\ldots This results in a max-min fair allocation of \textbf{2.5, 0.5 and 0.5} for each flow respectively. \ldots\\
+\ldots We vary the number of flows from A to B between \textbf{0 and 10}. \ldots
+\begin{center}
+\expincludegraphics[width=4.7cm]{abc-vary2}
+{num-flows-A-B-vs-flow-allocation-B-C.pdf}
+\end{center}
+\end{mdframed}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\vspace{0.2cm}
+
+\vspace{0.05in}
+\noindent \textbf{We welcome readers to themselves make modifications in the \LaTeX{} code for the full text block at the start of this section to see how the text and results change in place.} This example illustrates the simplicity of a reader interacting with a \sysname-enabled paper. It is up to the authors how much of an experiment is exposed for interaction. Parts of the experiment can be left fixed, such as the topology in the above example. We will next use the same example to detail \sysname's design and the authors' perspective.
