@@ -15,7 +15,7 @@ https://drive.google.com/file/d/1f8gu3MpWzXM4WbpFLy7DXDcR4z3s6Ws9/view
 
 (Make sure to manually set the quality to 720p or 1080p in the player -- the default is 360p)
 
-**Note:** new max-min fairness and congestion control experiments run as quick as in the video under mild parameter changes. The leaf-spine load experiments (not shown in video) are heavy experiments that consume a large amount of time to rerun with new parameters (~8 hours on single core). See the instructions below for more information on reproduction duration.
+**Note:** new max-min fairness and congestion control experiments run as quick as in the video under mild parameter changes. The leaf-spine load experiments (not shown in video) are heavy experiments that consume a large amount of time to rerun with new parameters (~8 hours on single core). See the instructions below for more information on reproduction duration. **Extra note:** the latest version of this repository also includes installing `texlive-fonts-extra` to render the final PDF, which adds a few minutes in setting up the environment for the first time on top of what is shown in the video.
 
 
 ## Using CodeBind for your own paper
